@@ -5,19 +5,13 @@ def suma(x):
     return suma 
 
 def factors(x):
-    # We will store all factors in `result`
     result = []
     i = 1
     count = 0
-    # This will loop from 1 to int(sqrt(x))
     while i*i <= x:
-        # Check if i divides x without leaving a remainder
         if x % i == 0:
-            #count+=1
             result.append(i)
-            # Handle the case explained in the 4th
-            if x//i != i: # In Python, // operator performs integer/floored division
-                #count+=1
+            if x//i != i: 
                 result.append(x//i)
         i += 1
     # Return the list of factors of x
