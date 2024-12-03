@@ -270,11 +270,15 @@ import time
 from optimized_permutations import len_of_permutations
 last = 1
 
-for i in range(12,13):
+for i in range(8,13):
     start = time.time()
     dist = generate_digit_distributions(i)
+    end = time.time()
+    print(end-start)
+    start = time.time()
     sum1 = 0
     for j in range(len(dist)):
+    #     sum1+=1
         sum1 += len_of_permutations(dict_to_list(dist[j]))
     # print(sum1/last)
     end = time.time()
