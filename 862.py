@@ -270,21 +270,21 @@ import time
 from optimized_permutations import len_of_permutations
 last = 1
 
-for i in range(8,13):
+for i in range(0,13):
     start = time.time()
     dist = generate_digit_distributions(i)
     end = time.time()
-    print(end-start)
+    # print(end-start)
     start = time.time()
     sum1 = 0
-    for j in range(len(dist)):
-    #     sum1+=1
+    from tqdm import tqdm
+    for j in tqdm(range(len(dist))):
         sum1 += len_of_permutations(dict_to_list(dist[j]))
-    # print(sum1/last)
     end = time.time()
     print("Time taken for",i,"is",end-start)
     print("Number of permutations for",i,"is",sum1)
     last = sum1
+
 
 '''
 Time taken for 1 is 4.00543212890625e-05
@@ -305,5 +305,29 @@ Time taken for 8 is 2.191204071044922
 Number of permutations for 8 is 377494043598
 Time taken for 9 is 21.7866427898407
 Number of permutations for 9 is 22176155292300
-next is expected to take too longand 12 would be further longer 
+
+
+
+after cython 
+Time taken for 0 is 2.86102294921875e-06
+Number of permutations for 0 is 0
+Time taken for 1 is 6.508827209472656e-05
+Number of permutations for 1 is 0
+Time taken for 2 is 3.266334533691406e-05
+Number of permutations for 2 is 36
+Time taken for 3 is 0.00015807151794433594
+Number of permutations for 3 is 1701
+Time taken for 4 is 0.0006308555603027344
+Number of permutations for 4 is 68418
+Time taken for 5 is 0.004881143569946289
+Number of permutations for 5 is 2894697
+Time taken for 6 is 0.011358976364135742
+Number of permutations for 6 is 134537715
+Time taken for 7 is 0.14085817337036133
+Number of permutations for 7 is 6853222674
+Time taken for 8 is 0.8977737426757812
+Number of permutations for 8 is 377494043598
+Time taken for 9 is 8.693598985671997
+Number of permutations for 9 is 22176155292300
+
 '''
