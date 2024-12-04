@@ -235,14 +235,10 @@ def len_of_permutations(list1):
     for count in digit_counts.values():
         total_perms //= factorial(count)
     
-    # Calculate leading zero permutations
     zero_perms = 0
     if 0 in digit_counts and list1[0] == 0:
-        # Total permutations if first digit is 0
         zero_perms = factorial(len(list1) - 1)
-        zero_digit_counts = {k:v for k,v in digit_counts.items() if k != 0}
-        for count in zero_digit_counts.values():
-            zero_perms //= factorial(count)
+        zero_perms //= factorial(digit_counts[0])
     
     total_perms = total_perms - zero_perms
     
@@ -250,6 +246,17 @@ def len_of_permutations(list1):
 
 
 # third iteration
+def len_of_permutations(list1):
+    """
+    Calculate number of unique permutations excluding those starting with 0.
+    """
+    # Precalculate unique permutations
+    total_perms = factorial(len(list1))
+    
+    # Count occurrences of each digit
+    digit_counts = {}
+    for digit in list1:
+        digit_counts[digit] = digit_counts.get(digit, 0) + 1
 
 # tests
 import time
@@ -267,23 +274,23 @@ import time
 (15, 6)
 (36, 9)
 '''
-from optimized_permutations import len_of_permutations
+from optimized_permutations import len_of_permutations,dict_to_list
 last = 1
 
-for i in range(0,13):
-    start = time.time()
-    dist = generate_digit_distributions(i)
-    end = time.time()
-    # print(end-start)
-    start = time.time()
-    sum1 = 0
-    from tqdm import tqdm
-    for j in tqdm(range(len(dist))):
-        sum1 += len_of_permutations(dict_to_list(dist[j]))
-    end = time.time()
-    print("Time taken for",i,"is",end-start)
-    print("Number of permutations for",i,"is",sum1)
-    last = sum1
+# for i in range(0,13):
+#     start = time.time()
+#     dist = generate_digit_distributions(i)
+#     end = time.time()
+#     # print(end-start)
+#     start = time.time()
+#     sum1 = 0
+#     from tqdm import tqdm
+#     for j in tqdm(range(len(dist))):
+#         sum1 += len_of_permutations(dict_to_list(dist[j]),dist[j])
+#     end = time.time()
+#     print("Time taken for",i,"is",end-start)
+#     print("Number of permutations for",i,"is",sum1)
+#     last = sum1
 
 
 '''
@@ -330,4 +337,48 @@ Number of permutations for 8 is 377494043598
 Time taken for 9 is 8.693598985671997
 Number of permutations for 9 is 22176155292300
 
+
+
+
+new iteration till 11
+100%|█████████████████████████████████████████████████| 1/1 [00:00<00:00, 25731.93it/s]
+Time taken for 0 is 0.024232864379882812
+Number of permutations for 0 is 0
+100%|██████████████████████████████████████████████| 10/10 [00:00<00:00, 499321.90it/s]
+Time taken for 1 is 0.00012493133544921875
+Number of permutations for 1 is 0
+100%|█████████████████████████████████████████████| 55/55 [00:00<00:00, 1310720.00it/s]
+Time taken for 2 is 0.00012493133544921875
+Number of permutations for 2 is 36
+100%|███████████████████████████████████████████| 220/220 [00:00<00:00, 1343154.12it/s]
+Time taken for 3 is 0.00024175643920898438
+Number of permutations for 3 is 1701
+100%|███████████████████████████████████████████| 715/715 [00:00<00:00, 1200050.96it/s]
+Time taken for 4 is 0.0006718635559082031
+Number of permutations for 4 is 67662
+100%|██████████████████████████████████████████| 2002/2002 [00:00<00:00, 989978.38it/s]
+Time taken for 5 is 0.0020961761474609375
+Number of permutations for 5 is 2797317
+100%|██████████████████████████████████████████| 5005/5005 [00:00<00:00, 536851.18it/s]
+Time taken for 6 is 0.00950312614440918
+Number of permutations for 6 is 125076735
+100%|████████████████████████████████████████| 11440/11440 [00:00<00:00, 151160.85it/s]
+Time taken for 7 is 0.07592606544494629
+Number of permutations for 7 is 6003398754
+100%|█████████████████████████████████████████| 24310/24310 [00:00<00:00, 35131.27it/s]
+Time taken for 8 is 0.6921787261962891
+Number of permutations for 8 is 303284495052
+100%|██████████████████████████████████████████| 48620/48620 [00:06<00:00, 7972.00it/s]
+Time taken for 9 is 6.099065065383911
+Number of permutations for 9 is 15744717556668
+100%|██████████████████████████████████████████| 92378/92378 [00:51<00:00, 1777.59it/s]
+Time taken for 10 is 51.968281984329224
+Number of permutations for 10 is 820061055982890
+100%|█████████████████████████████████████████| 167960/167960 [07:08<00:00, 391.89it/s]
+Time taken for 11 is 428.58784103393555
+Number of permutations for 11 is 42109731339917994
 '''
+
+# completely cython implemented
+from optimized_permutations import main
+main(12)
