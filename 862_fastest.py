@@ -11,7 +11,6 @@ def solve(N):
     def Multiply(res,w):
         return (res[0]*w,res[1]*w*w)
 
-
     @lru_cache(None)
     def solve(idx,lef):
         if idx == 10:
