@@ -6,11 +6,8 @@ Current_Date = 1
 Current_year = 1901
 
 import sys
-print(sys.getrecursionlimit())
 sys.setrecursionlimit(50000)
 print(sys.getrecursionlimit())
-
-
 
 def month_days(month,year):
     if month in ['Sept','Apr','June','Nov']:
